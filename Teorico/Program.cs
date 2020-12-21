@@ -93,6 +93,184 @@
 // Open _Layout.cshtml
 //o Update bootstrap reference
 
+//Other entities and second migration
+
+//Checklist:
+// Implement domain model
+//o Basic attributes
+//o Association (let's use ICollection, which matches List, HashSet, etc. - INSTANTIATE!)
+//o Constructors (default and with arguments)
+//o Custom methods
+// Add DbSet's in DbContext
+// Add-Migration OtherEntities
+//o Update-Database
+
+//Seeding Service
+//Checklist:
+// Stop IIS
+// In Data, create SeedingService
+// In Startup.cs, register SeedingService for dependency injection system
+// In Startup.cs, add SeedingService as parameter of Configure method. Call Seed for development profile
+
+//SellersController
+//Checklist:
+// Create Departments and Sellers links on navbar
+// Controller -> Add -> Controller -> MVC Controller - Empty -> SellersController
+// Create folder Views/Sellers
+// Views/Sellers -> Add -> View
+//o View name: Index
+//o Change title
+
+//SellerService and basic FindAll
+//Checklist:
+// Create folder Services
+// Create SellerService
+// In Startup.cs, register SellerService to dependency injection system
+// In SellerService, implement FindAll, returning List<Seller>
+// In SellersController, implement Index method, which should call SellerService.FindAll
+// In Views/Sellers/Index, write template code to show Sellers
+// Suggestion: user classes "table-striped table-hover" for table
+// Note: we 're going to apply formatting in later classes
+
+//Simple Create form
+//Checklist:
+// In Views/Sellers/Index, create link to "Create"
+// In controller, implement "Create" GET action
+// In Views/Sellers, create "Create" view
+// In Services/SellerService create Insert method
+// In controller, implement "Create" POST action
+//Reference:
+//https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery
+
+//Foreign key not null(referential integrity)
+//Checklist:
+// In Seller, add DepartmentId
+// Drop database
+// Create new migration, update database
+// Update SellerService.Insert for now: obj.Department = _context.Department.First();
+
+//SellerFormViewModel and Department select component
+//Checklist:
+// Create DepartmentService with FindAll method
+// In Startup.cs, register DepartmentService to dependency injection system
+// Create SellerFormViewModel
+// In controller:
+//o New dependency: DepartmentService
+//o Update "Create" GET action
+// In Views/Sellers/Create:
+//o Update model type to SellerFormViewModel
+//o Update form fields
+//o Add select component for DepartmentId
+//<div class= "form-group" >
+// < label asp -for= "Seller.DepartmentId" class= "control-label" ></ label >
+   
+//    < select asp -for= "Seller.DepartmentId" asp - items = "@(new SelectList(Model.Departments,"Id",
+//     "Name"))" class="form - control"></select>
+//       </ div >
+// In controller, update "Create" POST action -> NOT NECESSARY! :)
+// In SellerService.Insert, delete "First" call
+//Reference: https://stackoverflow.com/questions/34624034/select-tag-helper-in-asp-net-core-mvc
+
+//Delete seller
+//Checklist:
+// In SellerService, create FindById and Remove operations
+// In controller, create "Delete" GET action
+// In View/Sellers/Index, check link to "Delete" action
+// Create delete confirmation view: View/Sellers/Delete
+// Test App
+// In controller, create "Delete" POST action
+// Test App
+
+//Seller details and eager loading
+//Checklist:
+// https://docs.microsoft.com/en-us/ef/core/querying/related-data
+//Checklist:
+// In View/Sellers/Index, check link to "Details" action
+// In controller, create "Details" GET action
+// Create view: View/Sellers/Details
+// Include in FindAll: Include(obj => obj.Department) (namespace: Microsoft.EntityFrameworkCore)
+
+//Update seller and custom service exception
+//Checklist:
+// Create Services/Exceptions folder
+// Create NotFoundException and DbConcurrencyException
+// In SellerService, create Update method
+// In View/Sellers/Index, check link to "Edit" action
+// In controller, create "Edit" GET action
+// Create view: View/Sellers/Edit(similar do Create, plus hidden id)
+// Test app
+// In controller, create "Edit" POST action
+// Test app
+// Notice: ASP.NET Core selects option based on DepartmentId
+
+//Returning custom error page
+//Checklist:
+// Update ErrorViewModel
+// Update Error.cshtml
+// In SellerController:
+//o Create Error action with message parameter
+//o Update method calls
+
+//App locale, number and date formatting
+//Checklist:
+// In Startup.cs, define localization options
+// In Seller:
+//o Define custom labels [Display]
+//o Define semantics for date[DataType]
+//o Define display formats[DisplayFormat]
+
+//Validation
+//Checklist:
+// In Seller, add validation annotations
+// [Required(ErrorMessage = "{0} required")]
+// [EmailAddress(ErrorMessage = "Enter a valid email")]
+// [Range(100.0, 50000.0, ErrorMessage = "{0} must be from {1} to {2}")]
+// Update HTML for Create and Edit view
+//Summary:
+//<div asp-validation-summary= "All" class="text-danger"></div>
+//Field:
+//<span asp-validation-for="Name" class="text-danger"></span>
+//Client-side validation:
+//@section Scripts
+//{
+// @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+//}
+// Update SellersController
+
+//Asynchronous operations using Tasks (async, await)
+//Checklist:
+// Update DepartmentService
+// Update SellerService
+// Update SellersController
+//Exception handling for delete(referential integrity)
+
+//Checklist:
+// Create custom exception IntegrityException
+// In SellerService.RemoveAsync, catch DbUpdateException and throw IntegrityException
+// In SellersController, update Delete POST action
+
+//Preparing sales search navigation views
+//Checklist:
+// Create SalesRecordsController with Index, SimpleSearch and GroupingSearch action
+// Create folder Views/SalesRecords
+// Create Index view with search forms
+// Create "Sales" link on main navbar
+// Create SimpleSearch and GroupingSearch views
+
+//Implementing simple search
+//Checklist:
+// Create SalesRecordService with FindByDate operation
+// In Startup.cs, register SalesRecordService to dependency injection system
+// In SalesRecordsController, update SimpleSearch action
+// Update SimpleSearch view
+// Optional: format SalesRecord date and number
+
+//Implementing grouping search
+//Checklist:
+// In SalesRecordService create FindByDateGrouping operation
+// In SalesRecordsController, update GroupingSearch action
+// Update GroupingSearch view
+
 
 
 
