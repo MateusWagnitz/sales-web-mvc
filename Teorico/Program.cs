@@ -83,6 +83,17 @@
 // Check database in MySQL Workbench
 // Test app: CTRL+F5
 
+//Changing theme
+//Checklist:
+// Go to: http://bootswatch.com/3 (check Bootstrap version)
+// Choose a theme
+// Download bootstrap.css
+//o Suggestion: rename to bootstrap-name.css
+//o Save file to wwwroot/lib/bootstrap/dist/css (paste it inside Visual Studio)
+// Open _Layout.cshtml
+//o Update bootstrap reference
+
+
 
 
 
